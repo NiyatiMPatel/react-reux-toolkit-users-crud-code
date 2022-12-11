@@ -2,7 +2,7 @@
   "name": "session-19-redux-toolkit-axios-interceptor",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/NiyatiMPatel/react-redux-toolkit-users-crud.git",
+  "homepage": "https://github.com/NiyatiMPatel/react-redux-toolkit-users-crud",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
     "@testing-library/jest-dom": "^5.16.5",
@@ -28,7 +28,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -b master -d build"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
