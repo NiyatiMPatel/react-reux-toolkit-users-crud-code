@@ -1,0 +1,49 @@
+.form_control {
+ padding: 10px;
+}
+
+label {
+ margin-right: 12px;
+}
+
+input {
+ width: 80%;
+}
+
+.form_btn {
+ margin-top: 15px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ gap: 20px;
+}
+
+.form_btn button {
+ background: transparent;
+ padding: 5px 10px;
+}
+
+.error_text {
+ color: #f00;
+ font-size: 12px;
+}
+
+.actionsCon {
+ display: flex;
+ align-items: center;
+ gap: 15px;
+}
+
+.actions_link {
+ text-decoration: none;
+}
+
+.actions_btn {
+ border: none;
+ background: transparent;
+ color: #f00;
+}
+
+.search {
+ margin-bottom: 20px;
+}
