@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/NiyatiMPatel/react-redux-toolkit-users-crud.git/static/css/main.eab4b1f5.css",
-    "main.js": "/NiyatiMPatel/react-redux-toolkit-users-crud.git/static/js/main.f7000c1b.js",
-    "index.html": "/NiyatiMPatel/react-redux-toolkit-users-crud.git/index.html",
-    "main.eab4b1f5.css.map": "/NiyatiMPatel/react-redux-toolkit-users-crud.git/static/css/main.eab4b1f5.css.map",
-    "main.f7000c1b.js.map": "/NiyatiMPatel/react-redux-toolkit-users-crud.git/static/js/main.f7000c1b.js.map"
+    "main.css": "/NiyatiMPatel/react-redux-toolkit-users-crud/static/css/main.eab4b1f5.css",
+    "main.js": "/NiyatiMPatel/react-redux-toolkit-users-crud/static/js/main.f7000c1b.js",
+    "index.html": "/NiyatiMPatel/react-redux-toolkit-users-crud/index.html",
+    "main.eab4b1f5.css.map": "/NiyatiMPatel/react-redux-toolkit-users-crud/static/css/main.eab4b1f5.css.map",
+    "main.f7000c1b.js.map": "/NiyatiMPatel/react-redux-toolkit-users-crud/static/js/main.f7000c1b.js.map"
   },
   "entrypoints": [
     "static/css/main.eab4b1f5.css",
