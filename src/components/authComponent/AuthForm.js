@@ -1,18 +1,31 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { registerUser, loginUser } from '../../redux/authAction';
 import styles from './AuthForm.module.css';
 
 const AuthForm = () => {
  const [isLogin, setIsLogin] = useState(true);
+
  const dispatch = useDispatch()
 
- // const isLogin = useSelector((state) => (state.auth.isLogin))
+ const navigate = useNavigate()
 
  const switchAuthModeHandler = () => {
   setIsLogin((prevState) => !prevState);
  };
+
+ const submitHandler = (values) => {
+  if (isLogin) {
+   dispatch(loginUser({ email: values.email, password: values.password, returnSecureToken: true }))
+   navigate("/users3", { replace: true })
+
+  } else {
+   dispatch(registerUser({ email: values.email, password: values.password, returnSecureToken: true }))
+  }
+ }
 
  // ======== INITIAL VALUES DEFINITION ======== //
 
@@ -38,10 +51,7 @@ const AuthForm = () => {
     validationSchema={validationSchema}
 
     // ======= SUBMIT HANDLER ======== //
-    onSubmit={values => {
-     // same shape as initial values
-     console.log('values', values);
-    }}
+    onSubmit={submitHandler}
    >
     <Form>
      <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>

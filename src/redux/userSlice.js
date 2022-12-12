@@ -69,14 +69,14 @@ const userSlice = createSlice({
 
    .addCase((editUser.fulfilled), (state, action) => {
     state.status = 'fulfilled';
-    state.users.map((user) => {
-     if (user.id === action.payload.id) {
-      user.firstName = action.payload.firstName
-      user.lastName = action.payload.lastName
-      user.email = action.payload.email
-      user.gender = action.payload.gender
-      user.contact = action.payload.contact
-      user.age = action.payload.age
+    state.users.map((u) => {
+     if (u.id === action.payload.id) {
+      u.firstName = action.payload.firstName
+      u.lastName = action.payload.lastName
+      u.email = action.payload.email
+      u.gender = action.payload.gender
+      u.contact = action.payload.contact
+      u.age = action.payload.age
      }
     })
     state.error = false;
@@ -89,7 +89,7 @@ const userSlice = createSlice({
    })
    // ========== UPDATE USER END =========== //
 
-   // ========== POST USER END =========== //
+   // ========== POST USER START =========== //
    .addCase((createUser.pending), (state) => {
     state.status = 'pending';
     state.error = false
@@ -97,7 +97,7 @@ const userSlice = createSlice({
 
    .addCase((createUser.fulfilled), (state, action) => {
     state.status = 'fulfilled';
-    state.users.push(action.payload)
+    state.users = state.users.push(action.payload);
     state.error = false;
    })
 

@@ -3,8 +3,8 @@ import authHeader from "./auth-header";
 //  ===================== CREATE AXIOS USER INSTANCE =================== //
 export const instance = axios.create({
  baseURL: 'https://634b7670317dc96a3085463c.mockapi.io',
- // headers: { 'Content-Type': 'Application/json', 'Accept': 'Application/json' }
- headers: authHeader()
+ headers: { 'Content-Type': 'Application/json', 'Accept': 'Application/json', 'authHeader': authHeader() }
+ // headers: authHeader()
 });
 
 //  ================== CREATE AXIOS INTERCEPTORS ====================//
@@ -21,7 +21,6 @@ axios.interceptors.request.use(function (config) {
 axios.interceptors.response.use(function (response) {
  // Any status code that lie within the range of 2xx cause this function to trigger
  // Do something with response data
- console.log(response)
  return response;
 }, function (error) {
  // Any status codes that falls outside the range of 2xx cause this function to trigger
