@@ -10,7 +10,6 @@ import styles from './Users.module.css'
 
 
 const ListUserTable = () => {
-  const [listUsers, setListUsers] = useState([])
   const [userId, setUserId] = useState()
   // ====== TABLE GLOBAL SEARCH ======= /
   const [searchText, setSearchText] = useState('')
@@ -26,7 +25,7 @@ const ListUserTable = () => {
   // ========= FETCH USERS FROM API THROUGH REDUX TOOLKIT ========= //
   useEffect(() => {
     dispatch(usersList())
-  }, [])
+  }, [dispatch])
 
   // ========= READ STATE VALES FROM REDUX TOOLKIT STORE ============ //
   const status = useSelector((state) => (state.users.status))
