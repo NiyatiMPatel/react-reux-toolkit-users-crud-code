@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+// import { REACT_APP_USER_OBJECT_NAME } from "../constants/constants";
+import { getStorageUser } from "../helpers/storageService";
 import { registerUser, loginUser, logoutUser } from "./authAction";
 
-const user = JSON.parse(localStorage.getItem("user"));
+const user = getStorageUser(process.env.REACT_APP_USER_OBJECT_NAME);
 
 const initialState = user
-  ? { isLoggedIn: true, user, status: 'idle' }
-  : { isLoggedIn: false, user: null, status: 'idle' };
+  ? { isLoggedIn: true, user, status: 'idle', registered: true }
+  : { isLoggedIn: false, user: null, status: 'idle', registered: null };
 
 
 const authSlice = createSlice({
@@ -22,11 +24,13 @@ const authSlice = createSlice({
       .addCase((registerUser.fulfilled), (state) => {
         state.status = 'fulfilled';
         state.isLoggedIn = false;
+        state.registered = true
       })
 
       .addCase((registerUser.rejected), (state) => {
         state.status = 'rejected';
         state.isLoggedIn = false;
+        state.registered = false;
       })
       // =========== USER REGISTRATION END ========== //
 
@@ -63,6 +67,7 @@ const authSlice = createSlice({
       .addCase((logoutUser.rejected), (state) => {
         state.status = 'rejected';
         state.isLoggedIn = true;
+
       })
   },
 

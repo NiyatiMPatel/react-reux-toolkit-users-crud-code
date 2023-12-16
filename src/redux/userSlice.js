@@ -69,22 +69,12 @@ const userSlice = createSlice({
 
    .addCase((editUser.fulfilled), (state, action) => {
     state.status = 'fulfilled';
-    state.users.map((u) => {
-     if (u.id === action.payload.id) {
-      u.firstName = action.payload.firstName
-      u.lastName = action.payload.lastName
-      u.email = action.payload.email
-      u.gender = action.payload.gender
-      u.contact = action.payload.contact
-      u.age = action.payload.age
-     }
-    })
     state.error = false;
    })
 
    .addCase((editUser.rejected), (state) => {
     state.status = 'rejected';
-    state.users = [];
+    state.user = {};
     state.error = true;
    })
    // ========== UPDATE USER END =========== //
@@ -97,13 +87,11 @@ const userSlice = createSlice({
 
    .addCase((createUser.fulfilled), (state, action) => {
     state.status = 'fulfilled';
-    state.users = state.users.push(action.payload);
     state.error = false;
    })
 
    .addCase((createUser.rejected), (state) => {
     state.status = 'rejected';
-    state.users = [];
     state.error = true;
    })
    // ========== POST USER END =========== //
@@ -116,13 +104,11 @@ const userSlice = createSlice({
 
    .addCase((removeUser.fulfilled), (state, action) => {
     state.status = 'fulfilled';
-    state.users = state.users.filter((user) => user.id !== action.payload.id)
     state.error = false;
    })
 
    .addCase((removeUser.rejected), (state) => {
     state.status = 'rejected';
-    state.users = [];
     state.error = true;
    })
   // ========== DELETE USER END =========== //

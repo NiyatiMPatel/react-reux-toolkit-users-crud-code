@@ -17,7 +17,7 @@ const EditUserForm = (props) => {
 
   useEffect(() => {
     dispatch(user(userId));
-  }, [])
+  }, [dispatch, userId])
 
   const status = useSelector((state) => (state.users.status))
   const fetchedUser = useSelector((state) => state.users.user)
@@ -68,7 +68,7 @@ const EditUserForm = (props) => {
 
 
   const cancelHandler = () => {
-    navigate('/users3')
+    navigate('/users')
   }
 
   return (
@@ -92,8 +92,7 @@ const EditUserForm = (props) => {
             // ======= SUBMIT HANDLER ======== //
             onSubmit={values => {
               // same shape as initial values
-              dispatch(editUser({ id: userId, data: values }))
-              navigate('/users3')
+              dispatch(editUser({ id: userId, data: values })).then(() => navigate('/users'))
             }}
 
           >

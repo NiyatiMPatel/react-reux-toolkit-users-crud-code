@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { registerUser, loginUser } from '../../redux/authAction';
@@ -9,23 +9,33 @@ import styles from './AuthForm.module.css';
 const AuthForm = () => {
  const [isLogin, setIsLogin] = useState(true);
 
+ const navigate = useNavigate()
+
  const dispatch = useDispatch()
 
- const navigate = useNavigate()
+ const registered = useSelector((state) => state.auth.registered)
+ const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+ const user = useSelector((state) => state.auth.user)
 
  const switchAuthModeHandler = () => {
   setIsLogin((prevState) => !prevState);
  };
 
  const submitHandler = (values) => {
-  if (isLogin) {
+  if (isLogin || registered) {
    dispatch(loginUser({ email: values.email, password: values.password, returnSecureToken: true }))
-   navigate("/users3", { replace: true })
-
   } else {
    dispatch(registerUser({ email: values.email, password: values.password, returnSecureToken: true }))
   }
  }
+
+ useEffect(() => {
+  if (isLoggedIn && !!user) {
+   navigate('/users', { replace: true })
+  }
+ }, [isLoggedIn, user, navigate])
+
+
 
  // ======== INITIAL VALUES DEFINITION ======== //
 
@@ -54,7 +64,7 @@ const AuthForm = () => {
     onSubmit={submitHandler}
    >
     <Form>
-     <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
+     <h1>{registered ? 'Login' : isLogin ? 'Login' : 'Sign Up'}</h1>
      <div className={styles.control}>
       <label htmlFor='email'>Your Email</label>
       <Field type='email' name='email' required />
@@ -66,13 +76,13 @@ const AuthForm = () => {
       <ErrorMessage name="password" component="div" className={styles['error_text']} />
      </div>
      <div className={styles.actions}>
-      <button>{isLogin ? 'Login' : 'Create Account'}</button>
+      <button type='submit'>{registered ? 'Login' : isLogin ? 'Login' : 'Create Account'}</button>
       <button
        type='button'
        className={styles.toggle}
        onClick={switchAuthModeHandler}
       >
-       {isLogin ? 'Create new account' : 'Login with existing account'}
+       {registered ? 'Create new account' : isLogin ? 'Create new account' : 'Login with existing account'}
       </button>
      </div>
     </Form>

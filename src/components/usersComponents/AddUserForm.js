@@ -56,7 +56,7 @@ const AddUserForm = () => {
 
 
   const cancelHandler = () => {
-    navigate('/users3')
+    navigate('/users')
   }
 
   return (
@@ -76,7 +76,7 @@ const AddUserForm = () => {
             // ======= SUBMIT HANDLER ======== //
             onSubmit={values => {
               dispatch(createUser(values))
-              navigate('/users3')
+              navigate('/users')
             }}
 
           >

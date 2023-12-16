@@ -26,7 +26,7 @@ const ListUserTable = () => {
   // ========= FETCH USERS FROM API THROUGH REDUX TOOLKIT ========= //
   useEffect(() => {
     dispatch(usersList())
-  }, [dispatch])
+  }, [])
 
   // ========= READ STATE VALES FROM REDUX TOOLKIT STORE ============ //
   const status = useSelector((state) => (state.users.status))
@@ -34,9 +34,9 @@ const ListUserTable = () => {
   const modalState = useSelector((state) => (state.users.modalIsOpen))
 
   // ============ STORE FETCHED USERS LIST INTO COMPONENT USE_STATE ======== //
-  useEffect(() => {
-    setListUsers(users)
-  }, [users])
+  // useEffect(() => {
+  //   setListUsers(users)
+  // }, [users])
 
   // ============= ANTD TABLE CHANGE HANDLER ============ //
   const handleChange = (pagination, filters, sorter) => {
@@ -46,19 +46,21 @@ const ListUserTable = () => {
 
   // ========= DELETE USER BUTTON CLICK HANDLER - OPEN MODAL AND PASS USER ID TO IT ==== //
   const deleteModalHandler = (id) => {
-    setUserId(id)
-    dispatch(showModal())
+    setUserId(id);
+    dispatch(showModal());
   }
 
   // ======= CLOSE MODAL HANDLER TO BE PASSED AS PROPS ========= //
   const closeModalHandler = () => {
-    dispatch(closeModal())
+    dispatch(closeModal());
   }
 
   // ====== DELETE USER HANDLER PASSED TO MODAL AS PROPS ===== //
   const confirmHandler = () => {
-    dispatch(removeUser(userId))
-    dispatch(closeModal())
+    dispatch(removeUser(userId)).then(() => {
+      dispatch(usersList());
+      dispatch(closeModal());
+    });
   }
 
   // ============ ANTD TABLE COLUMNS CONFIGURATION =========== //
@@ -161,7 +163,7 @@ const ListUserTable = () => {
 
           <Table
             columns={columns}
-            dataSource={listUsers}
+            dataSource={users}
             rowKey='id'
             onChange={handleChange}
             pagination={{

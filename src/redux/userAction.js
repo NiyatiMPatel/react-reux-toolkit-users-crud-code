@@ -1,25 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllUsers, getUser, addUser, updateUser, deleteUser, } from "../axios/axios-utils";
-import { toast, Slide } from 'react-toastify';
+import { get, post, put, deletee, } from "../axios/axios-utils";
+import { toast } from 'react-toastify';
+import { TOASTIFY_CONFIG } from "../constants/constants";
 
 // ============ USERS LIST ACTION CREATOR ============ //
 export const usersList = createAsyncThunk(
  "users/fetch", async () => {
   try {
-   const response = await getAllUsers()
-   return response.data
+   const response = await get('/users2')
+   return response?.data
   } catch (error) {
-   toast.error('failed to fetch users!', {
-    position: "top-right",
-    autoClose: 1000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    transition: Slide,
-    theme: "light",
-   });
+   toast.error('failed to fetch users!', TOASTIFY_CONFIG);
   }
  }
 )
@@ -28,21 +19,11 @@ export const usersList = createAsyncThunk(
 export const user = createAsyncThunk(
  "user/fetch", async (id) => {
   try {
-   const response = await getUser(id)
-   return response.data
+   const response = await get(`/users2/${id}`)
+   return response?.data
 
   } catch (error) {
-   toast.error('failed to fetch user!', {
-    position: "top-right",
-    autoClose: 1000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    transition: Slide,
-    theme: "light",
-   });
+   toast.error('failed to fetch user!', TOASTIFY_CONFIG);
   }
  }
 )
@@ -51,31 +32,11 @@ export const user = createAsyncThunk(
 export const createUser = createAsyncThunk(
  "user/add", async (data) => {
   try {
-   const response = await addUser(data)
-   toast.success('created user successfully!', {
-    position: "top-right",
-    autoClose: 1000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    transition: Slide,
-    theme: "light",
-   });
-   return response.data
+   const response = await post('/users2', data)
+   toast.success('created user successfully!', TOASTIFY_CONFIG);
+   return response?.data
   } catch (error) {
-   toast.error('failed to create user!', {
-    position: "top-right",
-    autoClose: 1000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    transition: Slide,
-    theme: "light",
-   });
+   toast.error('failed to create user!', TOASTIFY_CONFIG);
   }
  }
 )
@@ -84,32 +45,12 @@ export const createUser = createAsyncThunk(
 export const editUser = createAsyncThunk(
  "user/update", async ({ id, data }) => {
   try {
-   const response = await updateUser(id, data)
-   toast.success('updated user successfully!', {
-    position: "top-right",
-    autoClose: 1000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    transition: Slide,
-    theme: "light",
-   });
-   return response.data
+   const response = await put(`/users2/${id}`, data)
+   toast.success('updated user successfully!', TOASTIFY_CONFIG);
+   return response?.data
 
   } catch (error) {
-   toast.error('failed to update user!', {
-    position: "top-right",
-    autoClose: 1000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    transition: Slide,
-    theme: "light",
-   });
+   toast.error('failed to update user!', TOASTIFY_CONFIG);
 
   }
  }
@@ -119,32 +60,12 @@ export const editUser = createAsyncThunk(
 export const removeUser = createAsyncThunk(
  "user/delete", async (id) => {
   try {
-   const response = await deleteUser(id)
-   toast.success('deleted user successfully!', {
-    position: "top-right",
-    autoClose: 1000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    transition: Slide,
-    theme: "light",
-   });
-   return response.data
+   const response = await deletee(`/users2/${id}`)
+   toast.success('deleted user successfully!', TOASTIFY_CONFIG);
+   return response?.data
 
   } catch (error) {
-   toast.error('failed to delete user!', {
-    position: "top-right",
-    autoClose: 1000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-    transition: Slide,
-    theme: "light",
-   });
+   toast.error('failed to delete user!', TOASTIFY_CONFIG);
 
   }
  }
